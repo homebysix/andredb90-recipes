@@ -11,7 +11,7 @@
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
-		<string>ProtonVPN</string>
+		<string>Proton Mail</string>
 		<key>fw_app_bundle_id</key>
         <string>ch.protonmail.desktop</string>
 	</dict>
