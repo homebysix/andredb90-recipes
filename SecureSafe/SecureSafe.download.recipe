@@ -3,13 +3,18 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the latest version of SecureSafe.</string>
+	<string>Downloads the latest version of SecureSafe.
+
+To download Apple Silicon use: "-arm64" in the DOWNLOAD_ARCH variable
+To download Intel use: "" in the DOWNLOAD_ARCH variable</string>
 	<key>Identifier</key>
 	<string>com.github.andredb90.download.securesafe</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
 		<string>SecureSafe</string>
+		<key>DOWNLOAD_ARCH</key>
+		<string>-arm64</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
@@ -18,10 +23,12 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>url</key>
-				<string>https://www.securesafe.com/de/downloads/</string>
 				<key>re_pattern</key>
-				<string>(\/\S*.pkg)</string>
+				<string>(https://app\.securesafe\.com/app/download/SecureSafe-Files-[0-9]+(?:\.[0-9]+)+%DOWNLOAD_ARCH%\.pkg)</string>
+				<key>result_output_var_name</key>
+				<string>DOWNLOAD_URL</string>
+				<key>url</key>
+				<string>https://securesafe.com/secure-data-platform-private</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLTextSearcher</string>
@@ -29,8 +36,10 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
+				<key>filename</key>
+				<string>%NAME%%DOWNLOAD_ARCH%.pkg</string>
 				<key>url</key>
-				<string>https:%match%</string>
+				<string>%DOWNLOAD_URL%</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
